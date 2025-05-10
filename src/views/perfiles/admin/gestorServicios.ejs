@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Panel de Servicios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/css/perfil-otros-usuarios.css">
+  <link rel="stylesheet" href="/css/navFooter.css">
+  <link rel="icon" href="/img/Logo.png">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <a href="/"><img src="../img/Logo.png" alt="Logo"></a>
+    </div>
+    <div class="nav-title">
+      <h1>Montes de Oca</h1>
+      <h3>Municipalidad</h3>
+    </div>
+  
+  
+<% if (session && session.user) { %>
+  <div class="show-dropdown-logged" id="showDropdownLogged">
+    <div class="dropdown" id="userDropdown">
+      <button class="dropdown-btn">
+        <i class="bi bi-person-fill"></i>
+        <span><%= session.user.nombre %></span>
+      </button>
+      <div class="dropdown-menu">
+        <a href="/perfilUsuario">Mi perfil</a>
+        <hr>
+
+        <% if (session.user.role === 'admin') { %>
+          <a href="/publicarAviso">Publicar aviso</a>
+          <a href="/publicarNoticia">Publicar noticia</a>
+          <a href="/publicarDenuncia">Publicar denuncia</a>
+          <hr>
+          <a href="/noticiasAdmin">Panel Noticias</a>
+          <a href="/denuncias">Panel Denuncias</a>
+          <a           <a href="/denuncias">Panel Denuncias</a>
+          <a href="/avisosAdmin">Panel Avisos</a>
+          <a href="/gestorServicios">Panel Servicios</a>
+          <hr>
+          <a href="/admin/denuncias">Tabla de denuncias</a>
+          <a href="/admin/usuarios">Tabla de usuarios</a>
+
+        <% } else if (session.user.role === 'concejal') { %>
+          <a href="/publicarAviso">Publicar aviso</a>
+          <a href="/publicarNoticia">Publicar noticia</a>
+          <a href="/publicarDenuncia">Publicar denuncia</a>
+          <hr>
+          <a href="/noticiasAdmin">Panel Noticias</a>
+          <a href="/denuncias">Panel Denuncias</a>
+          <a           <a href="/denuncias">Panel Denuncias</a>
+          <a href="/avisosAdmin">Panel Avisos</a>
+          <a href="/gestorServicios">Panel Servicios</a>
+
+        <% } else { %>
+          <!-- Usuario normal -->
+          <a href="/publicarDenuncia">Publicar denuncia</a>
+        <% } %>
+
+        <form action="/logout" method="GET">
+          <button type="submit" class="logout">Cerrar sesión</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<% } else { %>
+  <div class="show-btn-login" id="showBtnLogin">
+    <a href="/login"><button class="nav-boton-login" id="iniciarSesionButton">Iniciar Sesión</button></a>
+  </div>
+<% } %>
+  
+    <div class="nav-menu-toggle" onclick="toggleMobileNavbar()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  
+  </nav>
+  <div class="nav-links-container" id="nav-links-container">
+    <ul class="nav-links">
+      <li><a href="/">La municipalidad</a></li>
+      <li><a href="/servicios">Servicios</a></li>
+      <li><a href="/noticias">Noticias</a></li>
+      <li><a href="/avisos">Avisos</a></li>
+      <li>
+        <hr class="nav-divisor-m">
+        <button class="nav-boton-login-m" id=iniciarSesionButton2>Iniciar Sesión</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="services-wrapper">
+    <header class="services-header">
+      <h1>Servicios</h1>
+      <button id="btnCrearServicio" class="btn-primario">+ Nuevo Servicio</button>
+      <form id="formFiltros" method="get" action="/gestorServicios">
+        <input type="text" name="q" placeholder="Buscar..." value="<%= filtros.q %>">
+        <select name="categoria">
+          <option value="">Todas las categorías</option>
+          <option value="Trámites"      <%= filtros.categoria==='Trámites'?'selected':''%>>Trámites</option>
+          <option value="Eventos"       <%= filtros.categoria==='Eventos'?'selected':''%>>Eventos</option>
+          <option value="Infraestructura"<%= filtros.categoria==='Infraestructura'?'selected':''%>>Infraestructura</option>
+          <option value="Otro"          <%= filtros.categoria==='Otro'?'selected':''%>>Otro</option>
+        </select>
+        <button type="submit">Filtrar</button>
+      </form>
+    </header>
+
+    <% if (servicios.length === 0) { %>
+      <div class="banner-proximamente">Próximamente…</div>
+    <% } else { %>
+      <section class="services-grid">
+        <% servicios.forEach(s => { %>
+          <article class="service-card">
+            <h2><%= s.titulo %></h2>
+            <p><%= s.descripcion.length > 80 
+                  ? s.descripcion.substr(0,80) + '…' 
+                  : s.descripcion %>
+            </p>
+            <div class="card-actions">
+              <i class="bi bi-pencil-square icon-edit"   data-id="<%= s._id %>"></i>
+              <i class="bi bi-trash icon-delete"          data-id="<%= s._id %>"></i>
+            </div>
+          </article>
+        <% }) %>
+      </section>
+    <% } %>
+  </main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-info-container">
+      <img src="img/Logo-White.png" alt="Logo">
+      <div class="footer-info">
+        <p><strong>Horarios de Atención:</strong><br>Lunes a Viernes <br>8:00 AM - 4:00 PM</p>
+        <p><strong>Central Telefónica:</strong><br>2280-5589 / 2280-6034 <br>2280-4751 / 2280-5025</p>
+      </div>
+    </div>
+    <iframe
+      class="footer-mapa"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5071.14663629544!2d-84.05513722399955!3d9.933065274180944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e386a01344fb%3A0xa041b8ff3f01b4c4!2sMunicipalidad%20de%20Montes%20de%20Oca!5e1!3m2!1sen!2scr!4v1741832219087!5m2!1sen!2scr"
+      allowfullscreen=""
+      loading="lazy"
+    ></iframe>
+  </div>
+  <div class="footer-bottom">
+    <div class="social-icons">
+      <a href="https://www.youtube.com/@gobmontesdeoca" target="_blank"><i class="bi bi-youtube"></i></a>
+      <a href="https://www.instagram.com/gobmontesdeoca/?hl=en" target="_blank"><i class="bi bi-instagram"></i></a>
+      <a href="https://www.facebook.com/gobmontesdeoca" target="_blank"><i class="bi bi-facebook"></i></a>
+      <a href="https://x.com/gobmontesdeoca?lang=en" target="_blank"><i class="bi bi-twitter-x"></i></a>
+    </div>
+    <hr>
+    <p>Todos los derechos reservados © 2018<br>Municipalidad de Montes de Oca</p>
+  </div>
+</footer>
+
+  <!-- JS lo completa -->
+  <div id="modalServicio" class="modal"></div>
+  <div id="modalBorrar"  class="modal"></div>
+
+  <script src="/js/gestorServicios.js"></script>
+  <script src="/js/navFooter.js"></script>
+
+</body>
+</html>

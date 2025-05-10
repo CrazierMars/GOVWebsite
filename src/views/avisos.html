@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Municipalidad Montes de Oca</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="icon" href="img/Logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/avisos.css"/>
+    <link rel="stylesheet" href="css/navFooter.css" />
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="navbar-logo">
+        <a href="/"><img src="img/Logo.png" alt="Logo"></a>
+      </div>
+      <div class="nav-title">
+        <h1>Montes de Oca</h1>
+        <h3>Municipalidad</h3>
+      </div>
+    
+    
+  <% if (session && session.user) { %>
+    <div class="show-dropdown-logged" id="showDropdownLogged">
+      <div class="dropdown" id="userDropdown">
+        <button class="dropdown-btn">
+          <i class="bi bi-person-fill"></i>
+          <span><%= session.user.nombre %></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="/perfilUsuario">Mi perfil</a>
+          <hr>
+  
+          <% if (session.user.role === 'admin') { %>
+            <a href="/publicarAviso">Publicar aviso</a>
+            <a href="/publicarNoticia">Publicar noticia</a>
+            <a href="/publicarDenuncia">Publicar denuncia</a>
+            <hr>
+            <a href="/noticiasAdmin">Panel Noticias</a>
+            <a href="/denuncias">Panel Denuncias</a>
+            <a           <a href="/denuncias">Panel Denuncias</a>
+          <a href="/avisosAdmin">Panel Avisos</a>
+          <a href="/gestorServicios">Panel Servicios</a>
+            <hr>
+            <a href="/admin/denuncias">Tabla de Denuncias</a>
+            <a href="/admin/usuarios">Tabla de Usuarios</a>
+  
+          <% } else if (session.user.role === 'concejal') { %>
+            <a href="/publicarAviso">Publicar aviso</a>
+            <a href="/publicarNoticia">Publicar noticia</a>
+            <a href="/publicarDenuncia">Publicar denuncia</a>
+            <hr>
+            <a href="/noticiasAdmin">Panel Noticias</a>
+            <a href="/denuncias">Panel Denuncias</a>
+            <a           <a href="/denuncias">Panel Denuncias</a>
+          <a href="/avisosAdmin">Panel Avisos</a>
+          <a href="/gestorServicios">Panel Servicios</a>
+  
+          <% } else { %>
+            <!-- Usuario normal -->
+            <a href="/publicarDenuncia">Publicar denuncia</a>
+          <% } %>
+  
+          <form action="/logout" method="GET">
+            <button type="submit" class="logout">Cerrar sesión</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% } else { %>
+    <div class="show-btn-login" id="showBtnLogin">
+      <a href="/login"><button class="nav-boton-login" id="iniciarSesionButton">Iniciar Sesión</button></a>
+    </div>
+  <% } %>
+    
+      <div class="nav-menu-toggle" onclick="toggleMobileNavbar()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    
+    </nav>
+    
+    <div class="nav-links-container" id="nav-links-container">
+      <ul class="nav-links">
+        <li><a href="/">La municipalidad</a></li>
+        <li><a href="/servicios">Servicios</a></li>
+        <li><a href="/noticias">Noticias</a></li>
+        <li><a href="/avisos">Avisos</a></li>
+        <li>
+          <hr class="nav-divisor-m">
+          <button class="nav-boton-login-m" id=iniciarSesionButton2>Iniciar Sesión</button>
+        </li>
+      </ul>
+    </div>
+    <!-- FIN NAVBAR -->
+
+    <!-- CONTENIDO -->
+
+    <div class="containerEncabezado" name="containerEncabezado" id="containerEncabezado">
+      <div class="encabezadoChild" name="encabezadoChild" id="encabezadoChild">   
+      <h1 class="headline" name="headline" id="headline">Avisos</h1>
+      <div class="headlineLine" name="headlineLine" id="headlineLine"></div>
+      <div class="headlineText" name="hedlineText" id="headLineText">Avisos importantes de nuestra comunidad</div>
+      </div>
+  </div>
+
+    <!--INICIO CARD-AVISOS - TOP -->
+
+    <div class="main-avisos" id="mainContenidoAvisos">
+      <div class="cardAvisos-Top">
+        <!--INICIO CARDTOP 1-->
+        <div class="card" id="cardTop1" href="/avisoExpanded">
+          <img src="img/IMGjpg.jpg" alt="IMG" class="card-imagen" />
+          <div class="text">
+            <h3 class="card-title">Título Card 1</h3>
+            <p class="card-text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
+              soluta in autem aliquid quia quasi a repellat animi voluptates
+              veniam, pariatur voluptatem fuga dolorum amet. Magnam odio dolore
+              esse quasi!
+            </p>
+          </div>
+          <button id="seguirLeyendo" class="card-button">
+            <p class="parrafo-seguirLeyendo">
+              Seguir Leyendo <i class="bi bi-arrow-right"></i>
+            </p>
+          </button>
+        </div>
+        <!--FIN CARDTOP1-->
+
+        <!--INICIO CARDTOP 2-->
+        <div class="card" id="cardTop2"  data-ruta="d-0004.html">
+          <img src="../../img/IMGjpg.jpg" alt="IMG" class="card-imagen" />
+          <div class="text">
+            <h3 class="card-title">Título Card 2</h3>
+            <p class="card-text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque,
+              esse, eius iure, dolor quae distinctio expedita asperiores
+              consectetur eos laboriosam nobis saepe. Necessitatibus
+              exercitationem iste nihil sint hic libero aspernatur!
+            </p>
+          </div>
+          <button class="card-button">
+            <p class="parrafo-seguirLeyendo">
+              Seguir Leyendo <i class="bi bi-arrow-right"></i>
+            </p>
+          </button>
+        </div>
+        <!--FIN CARDTOP2-->
+
+        <!--INICIO CARDTOP 3-->
+        <div class="card" id="cardTop3"  data-ruta="d-0005.html">
+          <img src="../../img/IMGjpg.jpg" alt="IMG" class="card-imagen" />
+          <div class="text">
+            <h3 class="card-title">Título Card 3</h3>
+            <p class="card-text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex minus
+              quia quod repellendus ipsa voluptatibus maxime, expedita odio, vel
+              voluptate, rem corporis! Id, necessitatibus possimus! Laudantium,
+              aperiam natus. Eligendi, recusandae?
+            </p>
+          </div>
+          <button class="card-button">
+            <p class="parrafo-seguirLeyendo">
+              Seguir Leyendo <i class="bi bi-arrow-right"></i>
+            </p>
+          </button>
+        </div>
+        <!--FIN CARDTOP3-->
+      </div>
+
+      <!--FIN CARD-AVISOS -TOP -->
+
+      <!--INICIO CARD-AVISOS - BOTTOM -->
+
+      <!--INICIO CARDBOTTOM  1-->
+      <div class="cardAvisos-Bottom">
+        <div class="card" id="cardBottom1"  data-ruta="d-0006.html">
+          <img src="../../img/IMGjpg.jpg" alt="IMG" class="card-imagen" />
+          <div class="text">
+            <h3 class="card-title">Título Card 4</h3>
+            <p class="card-text">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto
+              est quibusdam ea eaque totam praesentium? Vel, quod? Adipisci
+              voluptate quibusdam quos ipsa, ex asperiores, natus, fugiat
+              tempore doloremque maiores aut!
+            </p>
+          </div>
+          <button class="card-button">
+            <p class="parrafo-seguirLeyendo">
+              Seguir Leyendo <i class="bi bi-arrow-right"></i>
+            </p>
+          </button>
+        </div>
+        <!--FIN CARDBOTTOM 1-->
+
+        <!--INICIO CARDBOTTOM  2-->
+        <div class="card" id="cardBottom2"  data-ruta="d-0007.html">
+          <img src="../../img/IMGjpg.jpg" alt="IMG" class="card-imagen" />
+          <div class="text">
+            <h3 class="card-title">Título Card 5</h3>
+            <p class="card-text">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto
+              est quibusdam ea eaque totam praesentium? Vel, quod? Adipisci
+              voluptate quibusdam quos ipsa, ex asperiores, natus, fugiat
+              tempore doloremque maiores aut!
+            </p>
+          </div>
+          <button class="card-button">
+            <p class="parrafo-seguirLeyendo">
+              Seguir Leyendo <i class="bi bi-arrow-right"></i>
+            </p>
+          </button>
+        </div>
+        <!--FIN CARDBOTTOM 2-->
+
+        <!--INICIO CARDBOTTOM 3-->
+        <div class="card" id="cardBottom3"  data-ruta="d-0008.html">
+          <img src="../../img/IMGjpg.jpg" alt="IMG" class="card-imagen" />
+          <div class="text">
+            <h3 class="card-title">Título Card 6</h3>
+            <p class="card-text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Perferendis in accusantium velit, sapiente illo fugiat aliquid,
+              dignissimos totam sunt delectus laudantium placeat vel quod magnam
+              deserunt error labore fuga aspernatur?
+            </p>
+          </div>
+          <button class="card-button">
+            <p class="parrafo-seguirLeyendo">
+              Seguir Leyendo <i class="bi bi-arrow-right"></i>
+            </p>
+          </button>
+        </div>
+      </div>
+      <!--FIN CARDBOTTOM 3-->
+    </div>
+    <!-- FIN DEL CONTENIDO DE AVISOS -->
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-top">
+        <div class="footer-info-container">
+          <img src="../../img/Logo-White.png" alt="Logo" />
+          <div class="footer-info">
+            <p>
+              <strong>Horarios de Atención:</strong> <br />Lunes a Viernes
+              <br />
+              8:00 AM - 4:00 PM
+            </p>
+            <p>
+              <strong>Central Telefónica:</strong> <br />2280-5589 / 2280-6034
+              <br />
+              2280-4751 / 2280-5025
+            </p>
+          </div>
+        </div>
+        <iframe
+          class="footer-mapa"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5071.14663629544!2d-84.05513722399955!3d9.933065274180944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e386a01344fb%3A0xa041b8ff3f01b4c4!2sMunicipalidad%20de%20Montes%20de%20Oca!5e1!3m2!1sen!2scr!4v1741832219087!5m2!1sen!2scr"
+          allowfullscreen=""
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="social-icons">
+          <a href="#"><i class="bi bi-youtube"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-twitter-x"></i></a>
+        </div>
+        <hr />
+        <p>
+          Todos los derechos reservados &copy; 2018 <br />
+          Municipalidad de Montes de Oca
+        </p>
+      </div>
+    </footer>
+    <!-- FIN DE FOOTER -->
+    <script type="text/javascript" src="js/navFooter.js"></script>
+    <script type="text/javascript" src="js/funtions.js"></script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+.menu-editar {
+  font-size: 30px;
+  color: #f58634;
+}
+.menu-editar:hover {
+  color: #264b63;
+  transition: 0.5s;
+}
+
+.tramitar-avisos-button {
+  background-color: #264b63;
+  width: auto;
+  height: 40px;
+  border-radius: 20px;
+  margin-left: 20px;
+  box-shadow: 4px 4px 7px -1px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 20px;
+}
+.tramitar-avisos-button:hover {
+  width: auto;
+  height: 40px;
+  color: #50b2f1;
+  background-color: #d86b1d;
+  border-color: #d86b1d;
+  border-radius: 20px;
+  transition: 0.5s;
+}
+
+@media (max-width: 768px) {
+  .menu-editar {
+    font-size: 30px;
+  }
+  .tramitar-avisos-button {
+    width: auto;
+    height: 40px;
+    top: 10px;
+    right: 10px;
+  }
+
+  .tramitar-avisos-button:hover {
+    width: auto;
+    height: 40px;
+    color: #50b2f1;
+    background-color: #d86b1d;
+    border-color: #d86b1d;
+    border-radius: 20px;
+    transition: 0.5s;
+  }
+}

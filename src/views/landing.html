@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Landing - Municipalidad de Montes de Oca</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Fuentes, íconos y estilos base -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="icon" href="img/Logo.png" type="image/x-icon">
+  <!-- Estilos específicos -->
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/navFooter.css">
+</head>
+<body>
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="navbar-logo">
+    <a href="/"><img src="img/Logo.png" alt="Logo"></a>
+  </div>
+  <div class="nav-title">
+    <h1>Montes de Oca</h1>
+    <h3>Municipalidad</h3>
+  </div>
+
+
+  <% if (session && session.user) { %>
+    <div class="show-dropdown-logged" id="showDropdownLogged">
+      <div class="dropdown" id="userDropdown">
+        <button class="dropdown-btn">
+          <i class="bi bi-person-fill"></i>
+          <span><%= session.user.nombre %></span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="/perfilUsuario">Mi perfil</a>
+          <hr>
+  
+          <% if (session.user.role === 'admin') { %>
+            <a href="/publicarAviso">Publicar aviso</a>
+            <a href="/publicarNoticia">Publicar noticia</a>
+            <a href="/publicarDenuncia">Publicar denuncia</a>
+            <hr>
+            <a href="/noticiasAdmin">Panel Noticias</a>
+            <a href="/denuncias">Panel Denuncias</a>
+            <a           <a href="/denuncias">Panel Denuncias</a>
+          <a href="/avisosAdmin">Panel Avisos</a>
+          <a href="/gestorServicios">Panel Servicios</a>
+            <hr>
+            <a href="/admin/denuncias">Tabla de Denuncias</a>
+            <a href="/admin/usuarios">Tabla de Usuarios</a>
+  
+          <% } else if (session.user.role === 'concejal') { %>
+            <a href="/publicarAviso">Publicar aviso</a>
+            <a href="/publicarNoticia">Publicar noticia</a>
+            <a href="/publicarDenuncia">Publicar denuncia</a>
+            <hr>
+            <a href="/noticiasAdmin">Panel Noticias</a>
+            <a href="/denuncias">Panel Denuncias</a>
+            <a           <a href="/denuncias">Panel Denuncias</a>
+          <a href="/avisosAdmin">Panel Avisos</a>
+          <a href="/gestorServicios">Panel Servicios</a>
+  
+          <% } else { %>
+            <!-- Usuario normal -->
+            <a href="/publicarDenuncia">Publicar denuncia</a>
+          <% } %>
+  
+          <form action="/logout" method="GET">
+            <button type="submit" class="logout">Cerrar sesión</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% } else { %>
+    <div class="show-btn-login" id="showBtnLogin">
+      <a href="/login"><button class="nav-boton-login" id="iniciarSesionButton">Iniciar Sesión</button></a>
+    </div>
+  <% } %>
+
+  <div class="nav-menu-toggle" onclick="toggleMobileNavbar()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+</nav>
+
+<div class="nav-links-container" id="nav-links-container">
+  <ul class="nav-links">
+    <li><a href="/">La municipalidad</a></li>
+    <li><a href="/servicios">Servicios</a></li>
+    <li><a href="/noticias">Noticias</a></li>
+    <li><a href="/avisos">Avisos</a></li>
+    <li>
+      <hr class="nav-divisor-m">
+      <button class="nav-boton-login-m" id=iniciarSesionButton2>Iniciar Sesión</button>
+    </li>
+  </ul>
+</div>
+<!-- FIN NAVBAR -->
+
+  <!-- CONTENIDO DE LA PÁGINA DE BIENVENIDA -->
+  <div class="landing-wrapper">
+    <!-- SECCIÓN HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Tu participación construye un cantón mejor</h1>
+        <p>Consulta servicios, entérate de las últimas noticias o presenta una denuncia.</p>
+        <a href="/publicarDenuncia"><button class="btn-hero">Realizar Denuncia</button></a>
+      </div>
+    </section>
+
+    <!-- ACCESOS RÁPIDOS (CARRUSEL) -->
+    <section class="carousel-section">
+      <h2>Accesos Rápidos</h2>
+      <div class="carousel-container">
+        <button class="carousel-control prev" id="prevBtn">&#9664;</button>
+        <ul class="carousel-slide" id="carouselSlide">
+          <li class="carousel-item" style="background-image: url('img/carrusel.png');">
+            <div class="carousel-item-overlay">
+              <h3>Servicios Municipales</h3>
+              <p>Consulta y realiza trámites de forma rápida y sencilla.</p>
+            </div>
+          </li>
+          <li class="carousel-item" style="background-image: url('img/servicios.png');">
+            <div class="carousel-item-overlay">
+              <h3>Denuncias Ciudadanas</h3>
+              <p>Reporta problemas o inquietudes de tu comunidad.</p>
+            </div>
+          </li>
+          <li class="carousel-item" style="background-image: url('img/denuncias.png');">
+            <div class="carousel-item-overlay">
+              <h3>Avisos Importantes</h3>
+              <p>Mantente informado sobre eventos y plazos relevantes.</p>
+            </div>
+          </li>
+          <li class="carousel-item" style="background-image: url('img/carrusel.png');">
+            <div class="carousel-item-overlay">
+              <h3>Noticias Municipales</h3>
+              <p>Entérate de las últimas novedades sobre tu cantón.</p>
+            </div>
+          </li>
+        </ul>
+        <button class="carousel-control next" id="nextBtn">&#9654;</button>
+      </div>
+    </section>
+
+    <!-- NOTICIAS RECIENTES -->
+    <section class="news-section">
+      <h2>Noticias Recientes</h2>
+      <div class="news-container">
+        <!-- Noticia 1 -->
+        <article class="news-item">
+          <img src="img/servicios.png" alt="Noticia 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <i class="bi bi-newspaper placeholder-icon" style="display: none;"></i>
+          <h3>Renovación del Parque Kennedy</h3>
+          <p>12 de marzo de 2025</p>
+        </article>
+        <!-- Noticia 2 -->
+        <article class="news-item">
+          <img src="img/denuncias.png" alt="Noticia 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <i class="bi bi-newspaper placeholder-icon" style="display: none;"></i>
+          <h3>Campaña de reciclaje comunitario</h3>
+          <p>9 de marzo de 2025</p>
+        </article>
+        <!-- Noticia 3 -->
+        <article class="news-item">
+          <img src="img/servicios.png" alt="Noticia 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <i class="bi bi-newspaper placeholder-icon" style="display: none;"></i>
+          <h3>Inauguración de nuevas aceras en San Pedro</h3>
+          <p>4 de marzo de 2025</p>
+        </article>
+      </div>
+      <a href="/noticias" class="ver-mas">Ver todas las noticias</a>
+    </section>
+
+    <!-- AVISOS IMPORTANTES -->
+    <section class="alerts-section">
+      <h2>Avisos Importantes</h2>
+      <div class="alerts-container">
+        <article class="alert-item">
+          <img src="img/denuncias.png" alt="Aviso 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <i class="bi bi-card-list placeholder-icon" style="display: none;"></i>
+          <h3>Cierre temporal Calle Central</h3>
+          <p>Del 15 al 20 de marzo de 2025</p>
+        </article>
+        <article class="alert-item">
+          <img src="img/servicios.png" alt="Aviso 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <i class="bi bi-card-list placeholder-icon" style="display: none;"></i>
+          <h3>Pago de impuestos municipales sin multa</h3>
+          <p>Hasta el 30 de marzo de 2025</p>
+        </article>
+        <article class="alert-item">
+          <img src="img/denuncias.png" alt="Aviso 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <i class="bi bi-card-list placeholder-icon" style="display: none;"></i>
+          <h3>Reunión Concejo de Distrito – San Pedro</h3>
+          <p>28 de marzo de 2025</p>
+        </article>
+      </div>
+      <a href="/avisos" class="ver-mas">Ver todos los avisos</a>
+    </section>
+
+    <!-- SERVICIOS DESTACADOS -->
+    <section class="services-section">
+      <h2>Servicios Destacados</h2>
+      <div class="services-container">
+        <div class="service-item">
+          <h3>Pago de impuestos en línea</h3>
+          <p>Realiza tus pagos de manera segura y sin filas.</p>
+        </div>
+        <div class="service-item">
+          <h3>Solicitud de permisos de construcción</h3>
+          <p>Revisa requisitos y gestiona tu permiso desde casa.</p>
+        </div>
+        <div class="service-item">
+          <h3>Cita para atención presencial</h3>
+          <p>Agenda tu cita en un par de clics y evita esperas.</p>
+        </div>
+      </div>
+      <a href="/servicios" class="ver-mas">Ver todos los servicios</a>
+    </section>
+
+    <!-- CÓMO HACER UNA DENUNCIA -->
+    <section class="complaint-section" id="complaint-section">
+      <h2>Cómo hacer una denuncia</h2>
+      <div class="complaint">
+        <img src="img/denuncias.png" alt="Denuncia" class="complaint-image" />
+        <div class="complaint-content">
+          <ol>
+            <li><strong>Regístrate o Inicia Sesión:</strong> Crea tu cuenta o accede para dar seguimiento.</li>
+            <li><strong>Completa el formulario:</strong> Describe tu denuncia e incluye evidencia.</li>
+            <li><strong>Recibe seguimiento:</strong> Consulta el estado de tu denuncia en tu perfil.</li>
+          </ol>
+          <a href="/publicarDenuncia" class="btn-complaint">Ir al formulario de denuncias</a>
+        </div>
+    </div>
+    </section>
+
+    <!-- PARTICIPACIÓN CIUDADANA -->
+    <section class="participation-section">
+      <h2>Participación Ciudadana</h2>
+      <p>Involúcrate en la toma de decisiones y la priorización de proyectos en tu comunidad. 
+         Conoce cómo presentar propuestas y mantener el cantón en constante mejora.</p>
+      <a href="#" class="btn-participation">Conocer más</a>
+    </section>
+  </div> <!-- Fin .landing-wrapper -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-info-container">
+        <img src="img/Logo-White.png" alt="Logo">
+        <div class="footer-info">
+          <p>
+            <strong>Horarios de Atención:</strong><br>
+            Lunes a Viernes <br> 8:00 AM - 4:00 PM
+          </p>
+          <p>
+            <strong>Central Telefónica:</strong><br>
+            2280-5589 / 2280-6034 <br> 2280-4751 / 2280-5025
+          </p>
+        </div>
+      </div>
+      <iframe
+        class="footer-mapa"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5071.14663629544!2d-84.05513722399955!3d9.933065274180944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e386a01344fb%3A0xa041b8ff3f01b4c4!2sMunicipalidad%20de%20Montes%20de%20Oca!5e1!3m2!1sen!2scr!4v1741832219087!5m2!1sen!2scr"
+        allowfullscreen=""
+        loading="lazy"
+      ></iframe>
+    </div>
+    <div class="footer-bottom">
+      <div class="social-icons">
+        <a href="https://www.youtube.com/@gobmontesdeoca" target="_blank"><i class="bi bi-youtube"></i></a>
+        <a href="https://www.instagram.com/gobmontesdeoca/?hl=en" target="_blank"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.facebook.com/gobmontesdeoca" target="_blank"><i class="bi bi-facebook"></i></a>
+        <a href="https://x.com/gobmontesdeoca?lang=en" target="_blank"><i class="bi bi-twitter-x"></i></a>
+      </div>
+      <hr>
+      <p>Todos los derechos reservados &copy; 2018<br>Municipalidad de Montes de Oca</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/landing.js"></script>
+  <script type="text/javascript" src="js/funtions.js"></script>
+  <script src="js/navFooter.js"></script>
+</body>
+</html>

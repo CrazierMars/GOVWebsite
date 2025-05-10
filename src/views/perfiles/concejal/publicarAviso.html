@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar aviso</title>
+    <link rel="stylesheet" href="css/navFooter.css">
+    <link rel="stylesheet" href="css/publicarAviso.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" href="img/Logo.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+      <nav class="navbar">
+        <div class="navbar-logo">
+          <a href="/"><img src="img/Logo.png" alt="Logo"></a>
+        </div>
+        <div class="nav-title">
+          <h1>Montes de Oca</h1>
+          <h3>Municipalidad</h3>
+        </div>
+      
+      
+        <% if (session && session.user) { %>
+          <div class="show-dropdown-logged" id="showDropdownLogged">
+            <div class="dropdown" id="userDropdown">
+              <button class="dropdown-btn">
+                <i class="bi bi-person-fill"></i>
+                <span><%= session.user.nombre %></span>
+              </button>
+              <div class="dropdown-menu">
+                <a href="/perfilUsuario">Mi perfil</a>
+                <hr>
+        
+                <% if (session.user.role === 'admin') { %>
+                  <a href="/publicarAviso">Publicar aviso</a>
+                  <a href="/publicarNoticia">Publicar noticia</a>
+                  <a href="/publicarDenuncia">Publicar denuncia</a>
+                  <hr>
+                  <a href="/noticiasAdmin">Panel Noticias</a>
+                  <a href="/denuncias">Panel Denuncias</a>
+                  <a           <a href="/denuncias">Panel Denuncias</a>
+          <a href="/avisosAdmin">Panel Avisos</a>
+          <a href="/gestorServicios">Panel Servicios</a>
+                  <hr>
+                  <a href="/admin/denuncias">Tabla de Denuncias</a>
+                  <a href="/admin/usuarios">Tabla de Usuarios</a>
+        
+                <% } else if (session.user.role === 'concejal') { %>
+                  <a href="/publicarAviso">Publicar aviso</a>
+                  <a href="/publicarNoticia">Publicar noticia</a>
+                  <a href="/publicarDenuncia">Publicar denuncia</a>
+                  <hr>
+                  <a href="/noticiasAdmin">Panel Noticias</a>
+                  <a href="/denuncias">Panel Denuncias</a>
+                  <a           <a href="/denuncias">Panel Denuncias</a>
+          <a href="/avisosAdmin">Panel Avisos</a>
+          <a href="/gestorServicios">Panel Servicios</a>
+        
+                <% } else { %>
+                  <!-- Usuario normal -->
+                  <a href="/publicarDenuncia">Publicar denuncia</a>
+                <% } %>
+        
+                <form action="/logout" method="GET">
+                  <button type="submit" class="logout">Cerrar sesión</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% } else { %>
+          <div class="show-btn-login" id="showBtnLogin">
+            <a href="/login"><button class="nav-boton-login" id="iniciarSesionButton">Iniciar Sesión</button></a>
+          </div>
+        <% } %>
+      
+        <div class="nav-menu-toggle" onclick="toggleMobileNavbar()">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      
+      </nav>
+      
+      <div class="nav-links-container" id="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="/">La municipalidad</a></li>
+          <li><a href="/servicios">Servicios</a></li>
+          <li><a href="/noticias">Noticias</a></li>
+          <li><a href="/avisos">Avisos</a></li>
+          <li>
+            <hr class="nav-divisor-m">
+            <button class="nav-boton-login-m" id=iniciarSesionButton2>Iniciar Sesión</button>
+          </li>
+        </ul>
+      </div>
+          <!-- FIN NAVBAR -->
+    </header>
+    <div class="containerEncabezado" name="containerEncabezado" id="containerEncabezado">
+        <div class="encabezadoChild" name="encabezadoChild" id="encabezadoChild">   
+        <h1 class="headline" name="headline" id="headline">Panel de Avisos - Concejal</h1>
+        <div class="headlineLine" name="headlineLine" id="headlineLine"></div>
+        <div class="headlineText" name="hedlineText" id="headLineText">Acá podrás publicar avisos relevantes para los ciudadanos</div>
+        </div>
+    </div>
+    <form class="publicarAvisoForm" name="publicarAvisoForm" id="publicarAvisoForm" method="POST" action="/postAviso">
+        <div class="encabezadoForm" name="encabezadoForm" id="encabezadoForm"><p class="headlineForm" name="headlineForm" id="headlineForm">Es necesario completar el formulario para publicar el aviso</p></div></div>
+        <div class="formularioPequenno" name="formularioPequenno" id="formularioPequenno">
+            <fieldset class="fieldsetPequenno" name="fieldsetPequenno" id="fieldsetPequenno1">
+                <legend>Título del aviso</legend>
+                <input type="text" name="titulo" id="tituloFormAviso" placeholder="Escribe el título del aviso">
+                <p class="error-message" id="tituloError">El titulo del aviso debe ser mas extenso</p>
+            </fieldset>
+            <fieldset class="fieldsetPequenno" name="fieldsetPequenno" id="fieldsetPequenno2">
+                <legend>Imágenes del aviso (Opcional)</legend>
+                <input type="text" name="imagenNoticia" id="imagenNoticia" placeholder="Máximo 3 imágenes.">
+            </fieldset>
+        </div>
+        <div class="formularioGrande" name="formularioGrande" id="formularioGrande">
+            <fieldset class="fieldsetGrande" name="fieldsetGrande" id="fieldsetGrande">
+                <legend>Contenido del aviso</legend>
+                <textarea type="text" name="contenidoAviso" maxlength="999" id="contenidoAviso" placeholder="Escribe el contenido del aviso (999 caracteres restantes)"></textarea>
+                <p class="error-message" id="contenidoError">La descripcion del aviso debe ser mas extenso.</p>
+                <p id="contadorAviso">999 caracteres restantes.</p>
+                <p name="date" id="date"></p>
+                <input type="hidden" name="date" id="inputFecha">
+            </fieldset>
+            <div class="botonesAdmin" name="botonesAdmin" id="botonesAdmin">
+                <button class="cancelar button" name="cancelar" id="cancelar">CANCELAR</button>
+                <button class="publicar button" name="publicar" id="publicar">PUBLICAR</button>
+            </div>
+        </div>
+    </form>
+       
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-top">
+                <div class="footer-info-container">
+                    <img src="img/Logo-White.png" alt="Logo">
+                    <div class="footer-info">
+                        <p><strong>Horarios de Atención:</strong> <br>Lunes a Viernes <br> 8:00 AM - 4:00 PM</p>
+                        <p><strong>Central Telefónica:</strong> <br>2280-5589 / 2280-6034 <br> 2280-4751 / 2280-5025</p>
+                    </div>
+                </div>
+                    <iframe class="footer-mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5071.14663629544!2d-84.05513722399955!3d9.933065274180944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e386a01344fb%3A0xa041b8ff3f01b4c4!2sMunicipalidad%20de%20Montes%20de%20Oca!5e1!3m2!1sen!2scr!4v1741832219087!5m2!1sen!2scr"
+                    allowfullscreen="" loading="lazy"></iframe>
+            </div>
+    
+            <div class="footer-bottom">
+                <div class="social-icons">
+                    <a href="https://www.youtube.com/@gobmontesdeoca" target="_blank"><i class="bi bi-youtube"></i></a>
+                    <a href="https://www.instagram.com/gobmontesdeoca/?hl=en" target="_blank"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.facebook.com/gobmontesdeoca" target="_blank"><i class="bi bi-facebook"></i></a>
+                    <a href="https://x.com/gobmontesdeoca?lang=en" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                </div>
+                <hr>
+                <p>Todos los derechos reservados &copy; 2018 <br> Municipalidad de Montes de Oca</p>
+            </div>
+        </footer>
+        <!-- FIN DE FOOTER -->
+    <!-- <script src="js/funtions.js"></script> -->
+    <script src="js/publicarAviso.js"></script>
+    <script src="js/navFooter.js"></script>
+    
+</body>
+</html>

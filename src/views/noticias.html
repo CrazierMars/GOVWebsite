@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias</title>
+    <link rel="stylesheet" href="css/navFooter.css">
+    <link rel="stylesheet" href="css/noticias.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" href="img/Logo.png" type="image/x-icon">
+
+</head>
+<body>
+    <header>
+      <nav class="navbar">
+        <div class="navbar-logo">
+          <a href="/"><img src="img/Logo.png" alt="Logo"></a>
+        </div>
+        <div class="nav-title">
+          <h1>Montes de Oca</h1>
+          <h3>Municipalidad</h3>
+        </div>
+        <% if (session && session.user) { %>
+          <div class="show-dropdown-logged" id="showDropdownLogged">
+            <div class="dropdown" id="userDropdown">
+              <button class="dropdown-btn">
+                <i class="bi bi-person-fill"></i>
+                <span><%= session.user.nombre %></span>
+              </button>
+              <div class="dropdown-menu">
+                <a href="/perfilUsuario">Mi perfil</a>
+                <hr>
+        
+                <% if (session.user.role === 'admin') { %>
+                  <a href="/publicarAviso">Publicar aviso</a>
+                  <a href="/publicarNoticia">Publicar noticia</a>
+                  <a href="/publicarDenuncia">Publicar denuncia</a>
+                  <hr>
+                  <a href="/noticiasAdmin">Panel Noticias</a>
+                  <a href="/denuncias">Panel Denuncias</a>
+                  <a           <a href="/denuncias">Panel Denuncias</a>
+          <a href="/avisosAdmin">Panel Avisos</a>
+          <a href="/gestorServicios">Panel Servicios</a>
+                  <hr>
+                  <a href="/admin/denuncias">Tabla de Denuncias</a>
+                  <a href="/admin/usuarios">Tabla de Usuarios</a>
+        
+                <% } else if (session.user.role === 'concejal') { %>
+                  <a href="/publicarAviso">Publicar aviso</a>
+                  <a href="/publicarNoticia">Publicar noticia</a>
+                  <a href="/publicarDenuncia">Publicar denuncia</a>
+                  <hr>
+                  <a href="/noticiasAdmin">Panel Noticias</a>
+                  <a href="/denuncias">Panel Denuncias</a>
+                  <a           <a href="/denuncias">Panel Denuncias</a>
+          <a href="/avisosAdmin">Panel Avisos</a>
+          <a href="/gestorServicios">Panel Servicios</a>
+        
+                <% } else { %>
+                  <!-- Usuario normal -->
+                  <a href="/publicarDenuncia">Publicar denuncia</a>
+                <% } %>
+        
+                <form action="/logout" method="GET">
+                  <button type="submit" class="logout">Cerrar sesión</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% } else { %>
+          <div class="show-btn-login" id="showBtnLogin">
+            <a href="/login"><button class="nav-boton-login" id="iniciarSesionButton">Iniciar Sesión</button></a>
+          </div>
+        <% } %>
+      
+        <div class="nav-menu-toggle" onclick="toggleMobileNavbar()">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      
+      </nav>
+      
+      <div class="nav-links-container" id="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="/">La municipalidad</a></li>
+          <li><a href="/servicios">Servicios</a></li>
+          <li><a href="/noticias">Noticias</a></li>
+          <li><a href="/avisos">Avisos</a></li>
+          <li>
+            <hr class="nav-divisor-m">
+            <button class="nav-boton-login-m" id=iniciarSesionButton2>Iniciar Sesión</button>
+          </li>
+        </ul>
+      </div>
+      <!-- FIN NAVBAR -->
+    </header>
+    <div class="containerEncabezado" name="containerEncabezado" id="containerEncabezado">
+        <div class="encabezadoChild" name="encabezadoChild" id="encabezadoChild">   
+        <h1 class="headline" name="headline" id="headline">Noticias</h1>
+        <div class="headlineLine" name="headlineLine" id="headlineLine"></div>
+        <div class="headlineText" name="hedlineText" id="headLineText">Manténgase siempre informado con las novedades de nuestro cantón</div>
+        </div>
+    </div>
+
+    <div class="newsContainer" name="newsContainer" id="newsContainer">
+        <!-- NOTICIA 1 -->
+<div class="noticia" id="noticia1">
+    <img class="imagen" id="imagen-noticia1" src="img/iglesia.jpg" />
+    <div class="contenidoNoticia" id="contenidoNoticia1">
+      <div class="tituloNoticia" id="tituloNoticia1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+      <div class="fechaNoticia" id="fechaNoticia1">03 de marzo del 2025</div>
+      <div class="descripcionNoticia" id="descripcionNoticia1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+      <div class="botones">
+        <div class="containerButton" id="containerButton1">
+          <button class="leerMas seguirLeyendo button" id="leerMas1"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+          <div class="botonesEdicion" id="botonesEdicion1">
+            <button class="leerMas button copiarB"><i class="bi bi-link-45deg"></i>COPIAR LINK</button>
+            <button class="leerMas button compartirB"><i class="bi bi-send"></i>COMPARTIR</button>
+          </div>
+        </div>
+        <div class="containerEditar" id="containerEditar1">
+          <button class="editarNoticia button" id="editarNoticia1"><i class="bi bi-three-dots menuEditar"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- NOTICIA 2 -->
+  <div class="noticia" id="noticia2">
+    <img class="imagen" id="imagen-noticia2" src="img/iglesia.jpg" />
+    <div class="contenidoNoticia" id="contenidoNoticia2">
+      <div class="tituloNoticia" id="tituloNoticia2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+      <div class="fechaNoticia" id="fechaNoticia2">03 de marzo del 2025</div>
+      <div class="descripcionNoticia" id="descripcionNoticia2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+      <div class="botones">
+        <div class="containerButton" id="containerButton2">
+          <button class="leerMas seguirLeyendo button" id="leerMas2"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+          <div class="botonesEdicion" id="botonesEdicion2">
+            <button class="leerMas button copiarB"><i class="bi bi-link-45deg"></i>COPIAR LINK</button>
+            <button class="leerMas button compartirB"><i class="bi bi-send"></i>COMPARTIR</button>
+          </div>
+        </div>
+        <div class="containerEditar" id="containerEditar2">
+          <button class="editarNoticia button" id="editarNoticia2"><i class="bi bi-three-dots menuEditar"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- NOTICIA 3 -->
+  <div class="noticia" id="noticia3">
+    <img class="imagen" id="imagen-noticia3" src="img/iglesia.jpg" />
+    <div class="contenidoNoticia" id="contenidoNoticia3">
+      <div class="tituloNoticia" id="tituloNoticia3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+      <div class="fechaNoticia" id="fechaNoticia3">03 de marzo del 2025</div>
+      <div class="descripcionNoticia" id="descripcionNoticia3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+      <div class="botones">
+        <div class="containerButton" id="containerButton3">
+          <button class="leerMas seguirLeyendo button" id="leerMas3"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+          <div class="botonesEdicion" id="botonesEdicion3">
+            <button class="leerMas button copiarB"><i class="bi bi-link-45deg"></i>COPIAR LINK</button>
+            <button class="leerMas button compartirB"><i class="bi bi-send"></i>COMPARTIR</button>
+          </div>
+        </div>
+        <div class="containerEditar" id="containerEditar3">
+          <button class="editarNoticia button" id="editarNoticia3"><i class="bi bi-three-dots menuEditar"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- NOTICIA 4 -->
+  <div class="noticia" id="noticia4">
+    <img class="imagen" id="imagen-noticia4" src="img/iglesia.jpg" />
+    <div class="contenidoNoticia" id="contenidoNoticia4">
+      <div class="tituloNoticia" id="tituloNoticia4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+      <div class="fechaNoticia" id="fechaNoticia4">03 de marzo del 2025</div>
+      <div class="descripcionNoticia" id="descripcionNoticia4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+      <div class="botones">
+        <div class="containerButton" id="containerButton4">
+          <button class="leerMas seguirLeyendo button" id="leerMas4"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+          <div class="botonesEdicion" id="botonesEdicion4">
+            <button class="leerMas button copiarB"><i class="bi bi-link-45deg"></i>COPIAR LINK</button>
+            <button class="leerMas button compartirB"><i class="bi bi-send"></i>COMPARTIR</button>
+          </div>
+        </div>
+        <div class="containerEditar" id="containerEditar4">
+          <button class="editarNoticia button" id="editarNoticia4"><i class="bi bi-three-dots menuEditar"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- NOTICIA 5 -->
+  <div class="noticia" id="noticia5">
+    <img class="imagen" id="imagen-noticia5" src="img/iglesia.jpg" />
+    <div class="contenidoNoticia" id="contenidoNoticia5">
+      <div class="tituloNoticia" id="tituloNoticia5">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+      <div class="fechaNoticia" id="fechaNoticia5">03 de marzo del 2025</div>
+      <div class="descripcionNoticia" id="descripcionNoticia5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+      <div class="botones">
+        <div class="containerButton" id="containerButton5">
+          <button class="leerMas seguirLeyendo button" id="leerMas5"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+          <div class="botonesEdicion" id="botonesEdicion5">
+            <button class="leerMas button copiarB"><i class="bi bi-link-45deg"></i>COPIAR LINK</button>
+            <button class="leerMas button compartirB"><i class="bi bi-send"></i>COMPARTIR</button>
+          </div>
+        </div>
+        <div class="containerEditar" id="containerEditar5">
+          <button class="editarNoticia button" id="editarNoticia5"><i class="bi bi-three-dots menuEditar"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- NOTICIA 6 -->
+  <div class="noticia" id="noticia6">
+    <img class="imagen" id="imagen-noticia6" src="img/iglesia.jpg" />
+    <div class="contenidoNoticia" id="contenidoNoticia6">
+      <div class="tituloNoticia" id="tituloNoticia6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+      <div class="fechaNoticia" id="fechaNoticia6">03 de marzo del 2025</div>
+      <div class="descripcionNoticia" id="descripcionNoticia6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+      <div class="botones">
+        <div class="containerButton" id="containerButton6">
+          <button class="leerMas seguirLeyendo button" id="leerMas6"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+          <div class="botonesEdicion" id="botonesEdicion6">
+            <button class="leerMas button copiarB"><i class="bi bi-link-45deg"></i>COPIAR LINK</button>
+            <button class="leerMas button compartirB"><i class="bi bi-send"></i>COMPARTIR</button>
+          </div>
+        </div>
+        <div class="containerEditar" id="containerEditar6">
+          <button class="editarNoticia button" id="editarNoticia6"><i class="bi bi-three-dots menuEditar"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- NOTICIA 7 -->
+  <div class="noticia" id="noticia7">
+    <img class="imagen" id="imagen-noticia7" src="img/iglesia.jpg" />
+    <div class="contenidoNoticia" id="contenidoNoticia7">
+      <div class="tituloNoticia" id="tituloNoticia7">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+      <div class="fechaNoticia" id="fechaNoticia7">03 de marzo del 2025</div>
+      <div class="descripcionNoticia" id="descripcionNoticia7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+      <div class="botones">
+        <div class="containerButton" id="containerButton7">
+          <button class="leerMas seguirLeyendo button" id="leerMas7"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+          <div class="botonesEdicion" id="botonesEdicion7">
+            <button class="leerMas button copiarB"><i class="bi bi-link-45deg"></i>COPIAR LINK</button>
+            <button class="leerMas button compartirB"><i class="bi bi-send"></i>COMPARTIR</button>
+          </div>
+        </div>
+        <div class="containerEditar" id="containerEditar7">
+          <button class="editarNoticia button" id="editarNoticia7"><i class="bi bi-three-dots menuEditar"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- NOTICIA 8 -->
+  <div class="noticia" id="noticia8">
+    <img class="imagen" id="imagen-noticia8" src="img/iglesia.jpg" />
+    <div class="contenidoNoticia" id="contenidoNoticia8">
+      <div class="tituloNoticia" id="tituloNoticia8">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+      <div class="fechaNoticia" id="fechaNoticia8">03 de marzo del 2025</div>
+      <div class="descripcionNoticia" id="descripcionNoticia8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+      <div class="botones">
+        <div class="containerButton" id="containerButton8">
+          <button class="leerMas seguirLeyendo button" id="leerMas8"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+          <div class="botonesEdicion" id="botonesEdicion8">
+            <button class="leerMas button copiarB"><i class="bi bi-link-45deg"></i>COPIAR LINK</button>
+            <button class="leerMas button compartirB"><i class="bi bi-send"></i>COMPARTIR</button>
+          </div>
+        </div>
+        <div class="containerEditar" id="containerEditar8">
+          <button class="editarNoticia button" id="editarNoticia8"><i class="bi bi-three-dots menuEditar"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-top">
+                <div class="footer-info-container">
+                    <img src="img/Logo-White.png" alt="Logo">
+                    <div class="footer-info">
+                        <p><strong>Horarios de Atención:</strong> <br>Lunes a Viernes <br> 8:00 AM - 4:00 PM</p>
+                        <p><strong>Central Telefónica:</strong> <br>2280-5589 / 2280-6034 <br> 2280-4751 / 2280-5025</p>
+                    </div>
+                </div>
+                    <iframe class="footer-mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5071.14663629544!2d-84.05513722399955!3d9.933065274180944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e386a01344fb%3A0xa041b8ff3f01b4c4!2sMunicipalidad%20de%20Montes%20de%20Oca!5e1!3m2!1sen!2scr!4v1741832219087!5m2!1sen!2scr"
+                    allowfullscreen="" loading="lazy"></iframe>
+            </div>
+    
+            <div class="footer-bottom">
+                <div class="social-icons">
+                    <a href="https://www.youtube.com/@gobmontesdeoca" target="_blank"><i class="bi bi-youtube"></i></a>
+                    <a href="https://www.instagram.com/gobmontesdeoca/?hl=en" target="_blank"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.facebook.com/gobmontesdeoca" target="_blank"><i class="bi bi-facebook"></i></a>
+                    <a href="https://x.com/gobmontesdeoca?lang=en" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                </div>
+                <hr>
+                <p>Todos los derechos reservados &copy; 2018 <br> Municipalidad de Montes de Oca</p>
+            </div>
+        </footer>
+        <!-- FIN DE FOOTER -->
+    <script src="js/navFooter.js"></script>
+    <script src="js/noticias.js"></script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denuncias</title>
+    <link rel="stylesheet" href="css/navFooter.css">
+    <link rel="stylesheet" href="css/denuncias.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" href="img/Logo.png" type="image/x-icon">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-logo">
+              <a href="/"><img src="img/Logo.png" alt="Logo"></a>
+            </div>
+            <div class="nav-title">
+              <h1>Montes de Oca</h1>
+              <h3>Municipalidad</h3>
+            </div>
+          
+          
+<% if (session && session.user) { %>
+              <div class="show-dropdown-logged" id="showDropdownLogged">
+                <div class="dropdown" id="userDropdown">
+                  <button class="dropdown-btn">
+                    <i class="bi bi-person-fill"></i>
+                    <span><%= session.user.nombre %></span>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a href="/perfilUsuario">Mi perfil</a>
+                    <hr>
+                    <a href="/publicarAviso">Publicar aviso</a>
+                    <a href="/publicarNoticia">Publicar noticia</a>
+                    <a href="/publicarDenuncia">Publicar denuncia</a>
+                    <hr>
+                    <a href="/noticiasAdmin">Panel Noticias</a>
+                    <a href="/denuncias">Panel Denuncias</a>
+                    <a           <a href="/denuncias">Panel Denuncias</a>
+          <a href="/avisosAdmin">Panel Avisos</a>
+          <a href="/gestorServicios">Panel Servicios</a>
+                    <form action="/logout" method="GET">
+                      <button type="submit" class="logout">Cerrar sesión</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            <% } else { %>
+              <div class="show-btn-login" id="showBtnLogin">
+                <a href="/login"><button class="nav-boton-login" id="iniciarSesionButton">Iniciar Sesión</button></a>
+              </div>
+            <% } %>
+          
+            <div class="nav-menu-toggle" onclick="toggleMobileNavbar()">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          
+          </nav>
+          
+          <div class="nav-links-container" id="nav-links-container">
+            <ul class="nav-links">
+              <li><a href="/">La municipalidad</a></li>
+              <li><a href="/servicios">Servicios</a></li>
+              <li><a href="/noticias">Noticias</a></li>
+              <li><a href="/avisos">Avisos</a></li>
+              <li>
+                <hr class="nav-divisor-m">
+                <button class="nav-boton-login-m" id=iniciarSesionButton2>Iniciar Sesión</button>
+              </li>
+            </ul>
+          </div>
+          <!-- FIN NAVBAR -->
+    </header>
+    <div class="containerEncabezado" name="containerEncabezado" id="containerEncabezado">
+        <div class="encabezadoChild" name="encabezadoChild" id="encabezadoChild">   
+        <h1 class="headline" name="headline" id="headline">Denuncias</h1>
+        <div class="headlineLine" name="headlineLine" id="headlineLine"></div>
+        <div class="headlineText" name="hedlineText" id="headLineText">La voz de los monte ocaínos</div>
+        </div>
+    </div>
+
+    <div class="denunciasContainer" name="denunciasContainer" id="denunciasContainer">
+        <div class="denuncia" name="denuncia" id="denuncia1">
+            <img class="imagen" name="imagen" id="imagen-denuncia1" src="img/iglesia.jpg"></img>
+            <div class="contenidoDenuncia" name="contenidoDenuncia" id="contenidoDenuncia1">
+                <div class="tituloDenuncia" name="tituloDenuncia" id="tituloDenuncia1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                <div class="fechaDenuncia" name="fechaDenuncia" id="fechaDenuncia1">03 de marzo del 2025</div>
+                <div class="descripcionDenuncia" name="descripcionDenuncia" id="descripcionDenuncia1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+                <div class="botones">
+                    <div class="containerButton" id="containerButton1">
+                      <button class="leerMas button" id="leerMas1"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+                      <div class="botonesEdicion" id="botonesEdicion1">
+                        <button class="leerMas button"><i class="bi bi-check"></i>TRAMITAR</button>
+                        <button class="leerMas button"><i class="bi bi-x"></i>ELIMINAR</button>
+                      </div>
+                    </div>
+                    <div class="containerEditar" id="containerEditar1">
+                      <button class="tramitarDenuncia button" id="tramitarDenuncia1"><i class="bi bi-three-dots menuEditar"></i></button>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <!-- Denuncia 2 -->
+<div class="denuncia" name="denuncia" id="denuncia2">
+    <img class="imagen" name="imagen" id="imagen-denuncia2" src="img/iglesia.jpg">
+    <div class="contenidoDenuncia" name="contenidoDenuncia" id="contenidoDenuncia2">
+        <div class="tituloDenuncia" name="tituloDenuncia" id="tituloDenuncia2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <div class="fechaDenuncia" name="fechaDenuncia" id="fechaDenuncia2">03 de marzo del 2025</div>
+        <div class="descripcionDenuncia" name="descripcionDenuncia" id="descripcionDenuncia2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+        <div class="botones">
+            <div class="containerButton" id="containerButton2">
+                <button class="leerMas button" id="leerMas2"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+                <div class="botonesEdicion" id="botonesEdicion2">
+                    <button class="leerMas button"><i class="bi bi-check"></i>TRAMITAR</button>
+                    <button class="leerMas button"><i class="bi bi-x"></i>ELIMINAR</button>
+                </div>
+            </div>
+            <div class="containerEditar" id="containerEditar2">
+                <button class="tramitarDenuncia button" id="tramitarDenuncia2"><i class="bi bi-three-dots menuEditar"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Denuncia 3 -->
+<div class="denuncia" name="denuncia" id="denuncia3">
+    <img class="imagen" name="imagen" id="imagen-denuncia3" src="img/iglesia.jpg">
+    <div class="contenidoDenuncia" name="contenidoDenuncia" id="contenidoDenuncia3">
+        <div class="tituloDenuncia" name="tituloDenuncia" id="tituloDenuncia3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <div class="fechaDenuncia" name="fechaDenuncia" id="fechaDenuncia3">03 de marzo del 2025</div>
+        <div class="descripcionDenuncia" name="descripcionDenuncia" id="descripcionDenuncia3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+        <div class="botones">
+            <div class="containerButton" id="containerButton3">
+                <button class="leerMas button" id="leerMas3"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+                <div class="botonesEdicion" id="botonesEdicion3">
+                    <button class="leerMas button"><i class="bi bi-check"></i>TRAMITAR</button>
+                    <button class="leerMas button"><i class="bi bi-x"></i>ELIMINAR</button>
+                </div>
+            </div>
+            <div class="containerEditar" id="containerEditar3">
+                <button class="tramitarDenuncia button" id="tramitarDenuncia3"><i class="bi bi-three-dots menuEditar"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Denuncia 4 -->
+<div class="denuncia" name="denuncia" id="denuncia4">
+    <img class="imagen" name="imagen" id="imagen-denuncia4" src="img/iglesia.jpg">
+    <div class="contenidoDenuncia" name="contenidoDenuncia" id="contenidoDenuncia4">
+        <div class="tituloDenuncia" name="tituloDenuncia" id="tituloDenuncia4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <div class="fechaDenuncia" name="fechaDenuncia" id="fechaDenuncia4">03 de marzo del 2025</div>
+        <div class="descripcionDenuncia" name="descripcionDenuncia" id="descripcionDenuncia4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+        <div class="botones">
+            <div class="containerButton" id="containerButton4">
+                <button class="leerMas button" id="leerMas4"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+                <div class="botonesEdicion" id="botonesEdicion4">
+                    <button class="leerMas button"><i class="bi bi-check"></i>TRAMITAR</button>
+                    <button class="leerMas button"><i class="bi bi-x"></i>ELIMINAR</button>
+                </div>
+            </div>
+            <div class="containerEditar" id="containerEditar4">
+                <button class="tramitarDenuncia button" id="tramitarDenuncia4"><i class="bi bi-three-dots menuEditar"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Denuncia 5 -->
+<div class="denuncia" name="denuncia" id="denuncia5">
+    <img class="imagen" name="imagen" id="imagen-denuncia5" src="img/iglesia.jpg">
+    <div class="contenidoDenuncia" name="contenidoDenuncia" id="contenidoDenuncia5">
+        <div class="tituloDenuncia" name="tituloDenuncia" id="tituloDenuncia5">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <div class="fechaDenuncia" name="fechaDenuncia" id="fechaDenuncia5">03 de marzo del 2025</div>
+        <div class="descripcionDenuncia" name="descripcionDenuncia" id="descripcionDenuncia5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+        <div class="botones">
+            <div class="containerButton" id="containerButton5">
+                <button class="leerMas button" id="leerMas5"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+                <div class="botonesEdicion" id="botonesEdicion5">
+                    <button class="leerMas button"><i class="bi bi-check"></i>TRAMITAR</button>
+                    <button class="leerMas button"><i class="bi bi-x"></i>ELIMINAR</button>
+                </div>
+            </div>
+            <div class="containerEditar" id="containerEditar5">
+                <button class="tramitarDenuncia button" id="tramitarDenuncia5"><i class="bi bi-three-dots menuEditar"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Denuncia 6 -->
+<div class="denuncia" name="denuncia" id="denuncia6">
+    <img class="imagen" name="imagen" id="imagen-denuncia6" src="img/iglesia.jpg">
+    <div class="contenidoDenuncia" name="contenidoDenuncia" id="contenidoDenuncia6">
+        <div class="tituloDenuncia" name="tituloDenuncia" id="tituloDenuncia6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <div class="fechaDenuncia" name="fechaDenuncia" id="fechaDenuncia6">03 de marzo del 2025</div>
+        <div class="descripcionDenuncia" name="descripcionDenuncia" id="descripcionDenuncia6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+        <div class="botones">
+            <div class="containerButton" id="containerButton6">
+                <button class="leerMas button" id="leerMas6"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+                <div class="botonesEdicion" id="botonesEdicion6">
+                    <button class="leerMas button"><i class="bi bi-check"></i>TRAMITAR</button>
+                    <button class="leerMas button"><i class="bi bi-x"></i>ELIMINAR</button>
+                </div>
+            </div>
+            <div class="containerEditar" id="containerEditar6">
+                <button class="tramitarDenuncia button" id="tramitarDenuncia6"><i class="bi bi-three-dots menuEditar"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Denuncia 7 -->
+<div class="denuncia" name="denuncia" id="denuncia7">
+    <img class="imagen" name="imagen" id="imagen-denuncia7" src="img/iglesia.jpg">
+    <div class="contenidoDenuncia" name="contenidoDenuncia" id="contenidoDenuncia7">
+        <div class="tituloDenuncia" name="tituloDenuncia" id="tituloDenuncia7">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <div class="fechaDenuncia" name="fechaDenuncia" id="fechaDenuncia7">03 de marzo del 2025</div>
+        <div class="descripcionDenuncia" name="descripcionDenuncia" id="descripcionDenuncia7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+        <div class="botones">
+            <div class="containerButton" id="containerButton7">
+                <button class="leerMas button" id="leerMas7"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+                <div class="botonesEdicion" id="botonesEdicion7">
+                    <button class="leerMas button"><i class="bi bi-check"></i>TRAMITAR</button>
+                    <button class="leerMas button"><i class="bi bi-x"></i>ELIMINAR</button>
+                </div>
+            </div>
+            <div class="containerEditar" id="containerEditar7">
+                <button class="tramitarDenuncia button" id="tramitarDenuncia7"><i class="bi bi-three-dots menuEditar"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Denuncia 8 -->
+<div class="denuncia" name="denuncia" id="denuncia8">
+    <img class="imagen" name="imagen" id="imagen-denuncia8" src="img/iglesia.jpg">
+    <div class="contenidoDenuncia" name="contenidoDenuncia" id="contenidoDenuncia8">
+        <div class="tituloDenuncia" name="tituloDenuncia" id="tituloDenuncia8">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <div class="fechaDenuncia" name="fechaDenuncia" id="fechaDenuncia8">03 de marzo del 2025</div>
+        <div class="descripcionDenuncia" name="descripcionDenuncia" id="descripcionDenuncia8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel cursus sem. Curabitur gravida quam vitae purus egestas, a aliquam urna tincidunt. Vestibulum leo tortor, posuere vitae varius vel...</div>
+        <div class="botones">
+            <div class="containerButton" id="containerButton8">
+                <button class="leerMas button" id="leerMas8"><i class="bi bi-box-arrow-in-right"></i>  SEGUIR LEYENDO</button>
+                <div class="botonesEdicion" id="botonesEdicion8">
+                    <button class="leerMas button"><i class="bi bi-check"></i>TRAMITAR</button>
+                    <button class="leerMas button"><i class="bi bi-x"></i>ELIMINAR</button>
+                </div>
+            </div>
+            <div class="containerEditar" id="containerEditar8">
+                <button class="tramitarDenuncia button" id="tramitarDenuncia8"><i class="bi bi-three-dots menuEditar"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    </div>
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-top">
+                <div class="footer-info-container">
+                    <img src="img/Logo-White.png" alt="Logo">
+                    <div class="footer-info">
+                        <p><strong>Horarios de Atención:</strong> <br>Lunes a Viernes <br> 8:00 AM - 4:00 PM</p>
+                        <p><strong>Central Telefónica:</strong> <br>2280-5589 / 2280-6034 <br> 2280-4751 / 2280-5025</p>
+                    </div>
+                </div>
+                    <iframe class="footer-mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5071.14663629544!2d-84.05513722399955!3d9.933065274180944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e386a01344fb%3A0xa041b8ff3f01b4c4!2sMunicipalidad%20de%20Montes%20de%20Oca!5e1!3m2!1sen!2scr!4v1741832219087!5m2!1sen!2scr"
+                    allowfullscreen="" loading="lazy"></iframe>
+            </div>
+    
+            <div class="footer-bottom">
+                <div class="social-icons">
+                    <a href="https://www.youtube.com/@gobmontesdeoca" target="_blank"><i class="bi bi-youtube"></i></a>
+                    <a href="https://www.instagram.com/gobmontesdeoca/?hl=en" target="_blank"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.facebook.com/gobmontesdeoca" target="_blank"><i class="bi bi-facebook"></i></a>
+                    <a href="https://x.com/gobmontesdeoca?lang=en" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                  </div>
+                <hr>
+                <p>Todos los derechos reservados &copy; 2018 <br> Municipalidad de Montes de Oca</p>
+            </div>
+        </footer>
+        <!-- FIN DE FOOTER -->
+
+        <script src="js/perfilOtrosUsuarios.js"></script>
+        <script src="js/navFooter.js"></script>
+        <script src="js/denuncias.js"></script>
+    
+</body>
+</html>

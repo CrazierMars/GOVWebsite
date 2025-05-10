@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Usuarios del Sistema</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Fuentes, Íconos y CSS compartidos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/css/perfil-otros-usuarios.css">
+  <link rel="stylesheet" href="/css/navFooter.css" />
+  <link rel="icon" href="../../img/Logo.png" type="image/x-icon">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">
+          <a href="/"><img src="../../img/Logo.png" alt="Logo"></a>
+        </div>
+        <div class="nav-title">
+          <h1>Montes de Oca</h1>
+          <h3>Municipalidad</h3>
+        </div>
+      
+      
+    <% if (session && session.user) { %>
+      <div class="show-dropdown-logged" id="showDropdownLogged">
+        <div class="dropdown" id="userDropdown">
+          <button class="dropdown-btn">
+            <i class="bi bi-person-fill"></i>
+            <span><%= session.user.nombre %></span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="/perfilUsuario">Mi perfil</a>
+            <hr>
+    
+            <% if (session.user.role === 'admin') { %>
+              <a href="/publicarAviso">Publicar aviso</a>
+              <a href="/publicarNoticia">Publicar noticia</a>
+              <a href="/publicarDenuncia">Publicar denuncia</a>
+              <hr>
+              <a href="/noticiasAdmin">Panel Noticias</a>
+              <a href="/denuncias">Panel Denuncias</a>
+              <a           <a href="/denuncias">Panel Denuncias</a>
+          <a href="/avisosAdmin">Panel Avisos</a>
+          <a href="/gestorServicios">Panel Servicios</a>
+              <hr>
+              <a href="/admin/denuncias">Tabla de denuncias</a>
+              <a href="/admin/usuarios">Tabla de usuarios</a>
+    
+            <% } else if (session.user.role === 'concejal') { %>
+              <a href="/publicarAviso">Publicar aviso</a>
+              <a href="/publicarNoticia">Publicar noticia</a>
+              <a href="/publicarDenuncia">Publicar denuncia</a>
+              <hr>
+              <a href="/noticiasAdmin">Panel Noticias</a>
+              <a href="/denuncias">Panel Denuncias</a>
+              <a           <a href="/denuncias">Panel Denuncias</a>
+          <a href="/avisosAdmin">Panel Avisos</a>
+          <a href="/gestorServicios">Panel Servicios</a>
+    
+            <% } else { %>
+              <!-- Usuario normal -->
+              <a href="/publicarDenuncia">Publicar denuncia</a>
+            <% } %>
+    
+            <form action="/logout" method="GET">
+              <button type="submit" class="logout">Cerrar sesión</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% } else { %>
+      <div class="show-btn-login" id="showBtnLogin">
+        <a href="/login"><button class="nav-boton-login" id="iniciarSesionButton">Iniciar Sesión</button></a>
+      </div>
+    <% } %>
+      
+        <div class="nav-menu-toggle" onclick="toggleMobileNavbar()">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      
+      </nav>
+      <div class="nav-links-container" id="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="/">La municipalidad</a></li>
+          <li><a href="/servicios">Servicios</a></li>
+          <li><a href="/noticias">Noticias</a></li>
+          <li><a href="/avisos">Avisos</a></li>
+          <li>
+            <hr class="nav-divisor-m">
+            <button class="nav-boton-login-m" id=iniciarSesionButton2>Iniciar Sesión</button>
+          </li>
+        </ul>
+      </div>
+
+  <main class="otros-usuarios-contenedor">
+    <h1 class="tabla-titulo">Usuarios del Sistema</h1>
+      <!-- Controles de Filtro Usuarios -->
+  <div class="filtros-usuarios" style="margin-bottom:1rem;">
+    <input
+      type="text"
+      id="filtroNombre"
+      placeholder="🔍 Busca por nombre o apellido..."
+      style="padding:0.5rem; width:60%;"/>
+    <select id="filtroRol" style="padding:0.5rem;">
+      <option value="">Todos los roles</option>
+      <option value="admin">Administrador</option>
+      <option value="concejal">Concejal</option>
+      <option value="user">Usuario</option>
+    </select>
+    <button id="resetFiltros" style="padding:0.5rem; margin-left:0.5rem;">
+        Limpiar filtros
+    </button>
+  </div>
+    <table class="tabla-usuarios">
+      <thead>
+        <tr>
+          <th>Nombre Completo</th>
+          <th>Correo Electrónico</th>
+          <th>Teléfono</th>
+          <th>Distrito</th>
+          <th>Rol</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (usuarios.length) { %>
+          <% usuarios.forEach(u => { %>
+            <tr>
+              <td><%= u.nombre %> <%= u.apellido1 %> <%= u.apellido2 %></td>
+              <td><%= u.email %></td>
+              <td><%= u.numeroTelefono %></td>
+              <td><%= u.distritoRegistro %></td>
+              <td><%= u.role.charAt(0).toUpperCase() + u.role.slice(1) %></td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <!-- Hasta 2 placeholders -->
+          <tr>
+            <td>Juan Pérez</td><td>juan@ejemplo.com</td><td>8888‑8888</td><td>Sabanilla</td><td>Usuario</td>
+          </tr>
+          <tr>
+            <td>Ana Gómez</td><td>ana@ejemplo.com</td><td>8777‑7777</td><td>San Pedro</td><td>Admin</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </main>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-info-container">
+        <img src="../../img/Logo-White.png" alt="Logo">
+        <div class="footer-info">
+          <p>
+            <strong>Horarios de Atención:</strong><br>
+            Lunes a Viernes <br> 8:00 AM - 4:00 PM
+          </p>
+          <p>
+            <strong>Central Telefónica:</strong><br>
+            2280-5589 / 2280-6034 <br> 2280-4751 / 2280-5025
+          </p>
+        </div>
+      </div>
+      <iframe
+        class="footer-mapa"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5071.14663629544!2d-84.05513722399955!3d9.933065274180944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e386a01344fb%3A0xa041b8ff3f01b4c4!2sMunicipalidad%20de%20Montes%20de%20Oca!5e1!3m2!1sen!2scr!4v1741832219087!5m2!1sen!2scr"
+        allowfullscreen=""
+        loading="lazy"
+      ></iframe>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="social-icons">
+        <a href="https://www.youtube.com/@gobmontesdeoca" target="_blank"><i class="bi bi-youtube"></i></a>
+        <a href="https://www.instagram.com/gobmontesdeoca/?hl=en" target="_blank"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.facebook.com/gobmontesdeoca" target="_blank"><i class="bi bi-facebook"></i></a>
+        <a href="https://x.com/gobmontesdeoca?lang=en" target="_blank"><i class="bi bi-twitter-x"></i></a>
+      </div>
+      <hr>
+      <p>Todos los derechos reservados &copy; 2018<br>Municipalidad de Montes de Oca</p>
+    </div>
+</footer>
+
+
+  
+    <script type="text/javascript" src="/js/perfilOtrosUsuarios.js"></script>
+    <!-- <script type="text/javascript" src="/js/funtions.js"></script> -->
+    <script type="text/javascript" src="/js/navFooter.js"></script>
+</body>
+</html>

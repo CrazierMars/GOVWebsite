@@ -1,0 +1,376 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+  }
+  
+  body {
+    background-image: url('../img/BG.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    max-height: 96vh;
+    background-attachment: fixed;
+  }
+
+/*------------------Encabezado*/
+.containerEncabezado{
+    background-color:#50B2F1;
+    height: 200px;
+    margin-top: 15px;
+    margin-bottom: 15px;;
+    /* opacity:75%; */
+    position: relative;
+}
+
+.headline{
+    font-size: 40px;
+    font-family: 'Montserrat', sans-serif;
+    color:#1D3892;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    padding-top: 25px;
+    opacity: 100%;
+}
+.headlineLine{
+    width: 150px;
+    height: 10px;
+    background-color: #264B63;
+    border-radius: 10px;
+    margin: 27px auto;
+}
+.headlineText{
+    font-size: 30px;
+    font-family: 'Montserrat', sans-serif;
+    color:#1D3892;
+    /* margin-top: 20px; */
+    text-align: center;
+    padding-bottom: 25px;
+}
+/*------------------Contenedor Denuncias*/
+.denunciasContainer{
+    background-color: #50B2F1;
+    min-width: 1200px;
+    max-width: 1700px;
+    max-height: 1200px;
+    margin: auto;
+    overflow-y: scroll;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding-right: 10px;
+}
+.denunciasContainer::-webkit-scrollbar{
+    width: 20px;
+}
+.denunciasContainer::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+.denunciasContainer::-webkit-scrollbar-thumb {
+    background: #264B63;
+    border-radius: 10px;
+  }
+.denunciasContainer::-webkit-scrollbar-thumb:hover {
+    background: #264b638c;
+  }
+/*------------------Estandar de cada Noticia*/
+.denuncia{
+    background-color: #50B2F1;
+    width: 100%;
+    height: 315px;
+    gap: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.denuncia::after{
+    content: '';
+    display: block;
+    position: absolute;
+    bottom:0;
+    width: 80%;
+    border-radius: 10px;
+    border-bottom: 5px solid #F58634;
+}
+
+.imagen{
+    background-color:grey;
+    width: 310px;
+    height: 270px;
+    margin-left: 20px;
+    border-radius: 10px;
+}
+
+.contenidoDenuncia{
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 270px;
+    border-radius: 10px;
+}
+.tituloDenuncia{
+    font-size: 30px;
+    color: black;
+    margin-top:5px;
+    margin-left: 10px;
+    max-width: 95%;
+    font-weight: 800;
+}
+.fechaDenuncia{
+    font-size: 25px;
+    color: #e86b0f;
+    margin-left: 10px;
+    font-weight: 700;
+    padding: 0.5% 0;
+}
+.descripcionDenuncia{
+    font-size: 20px;
+    color: black;
+    margin-left: 10px;
+    height: 35%;
+    padding-right: 3%;
+    overflow-y: scroll;
+    max-height: 85px;
+}
+.descripcionDenuncia::-webkit-scrollbar{
+    width: 8px;
+}
+.descripcionDenuncia::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+.descripcionDenuncia::-webkit-scrollbar-thumb {
+    background: #50b2f1;
+    border-radius: 10px;
+}
+.descripcionDenuncia::-webkit-scrollbar-thumb:hover {
+    background: #7eb9dd;
+}
+/*------------------Botones*/
+.button{
+    cursor: pointer;
+}
+.botones{
+    display: flex;
+    padding: 2% 2% 0% 45%;
+    gap:15px;
+    justify-content: right;
+}
+.containerButton{
+    width: 100%;
+    height: 38%;
+    /* align-items: right; */
+    padding-left: 15%;
+}
+.containerEditar{
+    padding-left:10px;
+}
+.leerMas{
+    width: 100%;
+    height: 60px;
+    background-color: #F58634;
+    border-radius: 10px;
+    box-shadow: 4px 4px #0000005b;
+    font-size: 20px;
+    font-style:bold;
+    color:white;
+    font-weight: 700;
+}
+.leerMas:hover{
+    background-color: #e86b0f;
+    color:rgba(0, 0, 0, 0.801);
+    transition: 0.5s;
+}
+.tramitarDenuncia{
+    background-color: #264B63;
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    box-shadow: 3px 3px #0000005b;
+}
+.menuEditar{
+    font-size: 50px;
+    color:#F58634;
+    margin-right: 5px;
+}
+.tramitarDenuncia:hover{
+    width: 60px;
+    height: 60px;
+    color:#50B2F1;
+    background-color: #F58634;
+    border-color: #F58634;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+.menuEditar:hover{
+    color:#264B63;
+    transition: 0.5s;
+}
+.botonesEdicion {
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .botonesEdicion.activa {
+    animation: fadeInLeft 0.4s ease forwards;
+    pointer-events: all;
+  }
+  
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+.containerEditar:hover ~ .containerButton .leerMas {
+    display: none;
+}
+
+.containerEditar:hover ~ .containerButton .botonesEdicion {
+    display: flex;
+}
+    @media (max-width:1000px){
+    *{
+        position: relative;
+    }
+    .denuncia::after{
+        width: 75%;
+    }
+/*------------------Encabezado*/
+    .containerEncabezado{
+        height: 150px;
+        width: 100%;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+    .headline{
+        font-size: 25px;
+        margin: 0 auto;
+        padding: 15px 0;
+    }
+    .headlineLine{
+        height: 5px;
+        margin: 0 auto;
+        padding: 6px 0;
+    }
+    .headlineText{
+        font-size: 18px;
+        margin-bottom: 5px;
+        margin: 0 auto;
+        padding: 15px 0;
+    }
+    .denunciasContainer{
+        min-width: 600px;
+        max-width: 900px;
+        height: 1260px;
+        overflow-y: scroll;
+    }
+    .denunciasContainer::-webkit-scrollbar{
+        width: 15px;
+    }
+    .denunciasContainer::-webkit-scrollbar-track {
+        border-radius: 10px;
+    }
+    .denunciasContainer::-webkit-scrollbar-thumb {
+        background: #264B63;
+        border-radius: 10px;
+    }
+    .denunciasContainer::-webkit-scrollbar-thumb:hover {
+        background: #264b638c;
+    }
+
+    /*------------------Estandar de cada Denuncia*/
+    .denuncia{
+        gap: 5px
+    }
+    .contenidoDenuncia{
+        width: 55%;
+        height: 260px;
+        border-radius: 5px;
+    }
+    .imagen{
+        width: 220px;
+        height: 260px;
+        border-radius: 5px;
+        margin-left: 5px;
+    }
+    .tituloDenuncia{
+        font-size: 20px;
+        margin-left: 0px;
+        margin-top: 0px;
+        margin-left: 5px;
+        margin-top: 5px;
+        padding-right: 10%;
+    }
+    .fechaDenuncia{
+        font-size: 15px;
+        margin-left: 5px;
+        margin-top: 5px;
+    }
+    .descripcionDenuncia{
+        font-size: 12px;
+        height: 30%;
+        margin-left: 5px;
+        margin-top: 5px;
+        width: auto;
+    }
+    .descripcionDenuncia::-webkit-scrollbar{
+        width: 10px;
+    }
+    .descripcionDenuncia::-webkit-scrollbar-track {
+        border-radius: 10px;
+    }
+    .descripcionDenuncia::-webkit-scrollbar-thumb {
+        background: #50b2f1;
+        border-radius: 10px;
+    }
+      .descripcionDenuncia::-webkit-scrollbar-thumb:hover {
+        background: #7eb9dd;
+    }
+    /*------------------Botones*/
+    .botones{
+        padding-left: 5px;
+        gap:10px;
+        height: 60px;
+    }
+    .containerButton{
+        width: 100%;
+        height: 38%;
+    }
+    .containerEditar{
+        width: 25%;
+        height: 50px;
+    }
+    .leerMas{
+        width: 100%;
+        height: 50px;
+        font-size: 15px;
+        font-weight: 600;
+    }
+    .menuEditar{
+        font-size: 30px;
+    }
+    .tramitarDenuncia{
+        width: 50px;
+        height: 100%;
+        border-radius: 15px;
+    }
+    .tramitarDenuncia:hover{
+        width: 50px;
+        height: 100%;
+        border-radius: 15px;
+    }
+}
